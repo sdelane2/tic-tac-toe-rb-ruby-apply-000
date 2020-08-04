@@ -14,18 +14,6 @@ def display_board(board)
   puts "-----------"
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
-def turn_count(board)
-  counter = 0 
-  board.each do |spaces|
-    if spaces == "X" || spaces == "O"
-      counter +=1 
-    end
-  end
-  counter
-end
-def current_player(board)
-   turn_count(board) % 2 == 0 ? "X" : "O"
-end
 def input_to_index(user_input)
   user_input.to_i - 1
 end
@@ -33,14 +21,12 @@ end
 def move(board, index, current_player = "X")
   board[index] = current_player
 end
-
 def position_taken?(board, location)
   board[location] != " " && board[location] != ""
 end
 def valid_move?(board, index)
   index.between?(0,8) && !position_taken?(board, index)
 end
-
 def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
@@ -52,12 +38,17 @@ def turn(board)
     turn(board)
   end
 end
-def play(board)
+def turn_count(board)
   counter = 0 
-  until counter == 9 
-    turn(board)
-    counter += 1
+  board.each do |spaces|
+    if spaces == "X" || spaces == "O"
+      counter +=1 
+    end
   end
+  counter
+end
+def current_player(board)
+   turn_count(board) % 2 == 0 ? "X" : "O"
 end
 def won?(board)
   WIN_COMBINATIONS.each do |win|
