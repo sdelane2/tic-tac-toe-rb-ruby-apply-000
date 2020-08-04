@@ -5,7 +5,18 @@ def display_board(board)
   puts "-----------"
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
-
+def turn_count(board)
+  counter = 0 
+  board.each do |spaces|
+    if spaces == "X" || spaces == "O"
+      counter +=1 
+    end
+  end
+  counter
+end
+def current_player(board)
+   turn_count(board) % 2 == 0 ? "X" : "O"
+end
 def input_to_index(user_input)
   user_input.to_i - 1
 end
