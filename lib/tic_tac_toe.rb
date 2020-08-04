@@ -89,6 +89,9 @@ end
 def play(board)
   until over?(board) 
     turn(board)
-    counter += 1
+  if won?(board, character)
+    puts "Congratulations #{character}"
+  else draw?(board)
+    puts "Draw"
   end
 end
